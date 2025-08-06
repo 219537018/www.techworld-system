@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import Sidebar from '../components/Sidebar';
 
 const Dashboard = () => {
   const { token } = useContext(AppContext);
+  const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedJob, setSelectedJob] = useState(null);
@@ -33,7 +34,15 @@ const Dashboard = () => {
     fetchJobs();
   }, [token]);
 
-  // 🔍 Filter jobs based on search term
+  const handleApply = (jobId) => {
+    if (!token) {
+      toast.info("Please log in to apply for this job.");
+      navigate('/login');
+    } else {
+      navigate(`/jobs/${jobId}/apply`);
+    }
+  };
+
   const filteredJobs = jobs.filter((job) =>
     [job.title, job.experience, job.qualification, job.techStack]
       .some(field => field.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -87,12 +96,12 @@ const Dashboard = () => {
                           >
                             View
                           </button>
-                          <Link
-                            to={`/jobs/${job._id}/apply`}
+                          <button
                             className="btn btn-sm btn-outline-primary rounded-pill"
+                            onClick={() => handleApply(job._id)}
                           >
                             Apply
-                          </Link>
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -135,12 +144,12 @@ const Dashboard = () => {
                   >
                     Close
                   </button>
-                  <Link
-                    to={`/jobs/${selectedJob._id}/apply`}
+                  <button
                     className="btn btn-primary"
+                    onClick={() => handleApply(selectedJob._id)}
                   >
                     Apply Now
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
