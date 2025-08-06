@@ -1,0 +1,23 @@
+/* Login.css */
+
+.login-background {
+  background-image: url('../assets/web2.jpg'); /* Path to the image */
+  background-size: cover; /* Ensure the image covers the container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  min-height: 100vh; /* Ensure the container takes up the full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for the login form */
+form {
+  max-width: 350px; /* Fixed size for the form */
+  width: 100%;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+  
