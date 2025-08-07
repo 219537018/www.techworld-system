@@ -1,10 +1,17 @@
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const router = express.Router();
-const adminAuth = require('../middleware/adminAuth'); // JWT or session-based middleware
+import express from 'express';
+import path from 'path';
+import fs from 'fs';
+import authAdmin from '../middleware/authAdmin.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-router.get('/secure-resume/:filename', adminAuth, (req, res) => {
+const resumeRouter = express.Router();
+
+// Reconstruct __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+resumeRouter.get('/secure-resume/:filename', authAdmin, (req, res) => {
   const filename = req.params.filename;
   const filePath = path.join(__dirname, '../uploads', filename);
 
@@ -12,15 +19,13 @@ router.get('/secure-resume/:filename', adminAuth, (req, res) => {
     return res.status(404).send('Resume not found');
   }
 
-  // Serve as inline content — so browser renders it in iframe
   res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'inline'); // ⚠️ NOT attachment
+  res.setHeader('Content-Disposition', 'inline');
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('X-Content-Type-Options', 'nosniff');
 
-  // Stream the PDF
   const fileStream = fs.createReadStream(filePath);
   fileStream.pipe(res);
 });
-const resumeRouter = express.Router();
+
 export default resumeRouter;
