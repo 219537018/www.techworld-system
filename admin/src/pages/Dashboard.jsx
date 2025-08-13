@@ -90,15 +90,17 @@ const Dashboard = () => {
         <h3>Welcome to Admin Dashboard</h3>
         <p>This is your main admin dashboard content.</p>
 
-        {/* Job Stats */}
-        <div className="card mt-4 p-3">
-          <h5>Total Published Jobs: {jobs.length}</h5>
+       {/* Stats Row */}
+      <div className="dashboard-stats">
+        <div className="stat-card">
+          <div className="stat-title">Total Published Jobs</div>
+          <div className="stat-value">{jobs.length}</div>
         </div>
-
-        {/* Applicant Stats */}
-        <div className="card mt-4 p-3">
-          <h5>Total Applicants: {applications.length}</h5> {/* ✅ Uses shared context data */}
+        <div className="stat-card">
+          <div className="stat-title">Total Applicants</div>
+          <div className="stat-value">{applications.length}</div>
         </div>
+      </div>
 
   
 

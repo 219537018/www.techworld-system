@@ -72,80 +72,50 @@ const JobApplicationForm = () => {
   };
 
   return (
-    <div className="d-flex" style={{ marginTop: '70px' }}>
+    <div className="d-flex application-form-wrapper">
       <Sidebar />
-      <div className="container p-4 w-100 bg-light">
-        <h3 className="mb-4">Job Application Form</h3>
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-
-          {/* ✅ Full Name (read-only from userData) */}
-          <div className="mb-3">
-            <label className="form-label">Full Name</label>
-            <input
-              type="text"
-              className="form-control"
-              value={userData?.name || ''}
-              readOnly
-            />
-          </div>
-
-          {/* ✅ Email (read-only from userData) */}
-          <div className="mb-3">
-            <label className="form-label">Email Address</label>
-            <input
-              type="email"
-              className="form-control"
-              value={userData?.email || ''}
-              readOnly
-            />
-          </div>
-
-          {/* ✅ Phone */}
-          <div className="mb-3">
-            <label className="form-label">Phone Number</label>
-            <input
-              type="tel"
-              className="form-control"
-              name="phone"
-              value={formInput.phone}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {/* ✅ Cover Letter */}
-          <div className="mb-3">
-            <label className="form-label">Cover Letter</label>
-            <textarea
-              className="form-control"
-              name="coverLetter"
-              value={formInput.coverLetter}
-              onChange={handleChange}
-              rows="4"
-              required
-            />
-          </div>
-
-          {/* ✅ Resume Upload */}
-          <div className="mb-3">
-            <label className="form-label">Upload Resume</label>
-            <input
-              type="file"
-              className="form-control"
-              name="resume"
-              onChange={handleChange}
-              accept=".pdf,.doc,.docx"
-              required
-            />
-          </div>
-
-          <button type="submit" className="btn btn-primary">
-            Submit Application
-          </button>
-        </form>
+      <div className="container p-4 w-100">
+        <div className="application-form-container">
+          <h3>Job Application Form</h3>
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
+            {/* Full Name */}
+            <div className="mb-3">
+              <label className="form-label">Full Name</label>
+              <input type="text" className="form-control" value={userData?.name || ''} readOnly />
+            </div>
+  
+            {/* Email */}
+            <div className="mb-3">
+              <label className="form-label">Email Address</label>
+              <input type="email" className="form-control" value={userData?.email || ''} readOnly />
+            </div>
+  
+            {/* Phone */}
+            <div className="mb-3">
+              <label className="form-label">Phone Number</label>
+              <input type="tel" className="form-control" name="phone" value={formInput.phone} onChange={handleChange} required />
+            </div>
+  
+            {/* Cover Letter */}
+            <div className="mb-3">
+              <label className="form-label">Cover Letter</label>
+              <textarea className="form-control" name="coverLetter" value={formInput.coverLetter} onChange={handleChange} rows="4" required />
+            </div>
+  
+            {/* Resume */}
+            <div className="mb-3">
+              <label className="form-label">Upload Resume</label>
+              <input type="file" className="form-control" name="resume" onChange={handleChange} accept=".pdf,.doc,.docx" required />
+            </div>
+  
+            {/* Submit */}
+            <button type="submit">Submit Application</button>
+          </form>
+        </div>
       </div>
     </div>
   );
+  
 };
 
 export default JobApplicationForm;
