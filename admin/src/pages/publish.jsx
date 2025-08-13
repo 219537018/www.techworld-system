@@ -150,7 +150,7 @@ const AddJob = () => {
         `}</style>
 
         <form onSubmit={onSubmitHandler} className="add-job-form">
-          <p className="title">Add Software Developer Job</p>
+          <p className="title">Add Tech Job</p>
 
           <div className="add-job-container">
             <div className="form-row">
